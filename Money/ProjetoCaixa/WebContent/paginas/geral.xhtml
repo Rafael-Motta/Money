@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<!-- <ui:define name="menu">
+		<ui:include src="/includes/principal.xhtml" />
+	</ui:define> -->
+	
+	<ui:define name="conteudo">
+		<h:form>
+			<p:dataTable emptyMessage="Nenhuma moeda encontrada."
+				value="#{MBBancoMoeda.itens}" var="item" 
+				paginator="true" rows="4" >
+				<f:facet name="header">
+					Lista de Moedas
+				</f:facet>
+				<p:column headerText="Nome" sortBy="#{item.nome}" 
+						  filterBy="#{item.nome}">
+					<h:outputText value="#{item.nome}" />
+				</p:column>
+				<p:column headerText="Código" sortBy="#{item.codigo}"
+						  filterBy="#{item.codigo}">
+					<h:outputText value="#{item.codigo}" />
+				</p:column>
+				<p:column headerText="Sinal" sortBy="#{item.sinal}" 
+						  filterBy="#{item.sinal}">
+					<h:outputText value="#{item.sinal}" />
+				</p:column>
+				<p:column headerText="Valor" sortBy="#{item.valor}" 
+						  filterBy="#{item.valor}">
+					<h:outputText value="#{item.valor}" />
+				</p:column>
+				<p:column headerText="Valor R$" sortBy="#{item.valorR}"
+						  filterBy="#{item.valorR}">
+					<h:outputText value="#{moeda.valorR}" />
+				</p:column>
+				<f:facet name="footer">
+					<p:commandLink value="Novo" onclick="PF('novo').open();" />
+				</f:facet>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+	
+	<p:dialog widgetVar="novo" draggable="false"
+			  resizable="false" closable="false"
+			  visible="true">
+		<h:form>
+			<p:panelGrid columns="2">	
+				<p:outputLabel value="Nome:" />
+				<p:inputText size="15" maxlength="20" />
+				<p:outputLabel value="Código:" />
+				<p:inputText size="15" maxlength="20" />
+				<p:outputLabel value="Sinal:" />
+				<p:inputText size="15" maxlength="20" />
+				<p:outputLabel value="Valor:" />
+				<p:inputText size="15" maxlength="20" />
+			</p:panelGrid>
+			<p:panelGrid columns="2">
+				<p:commandButton value="Salvar" />
+				<p:commandButton value="Cancelar" />
+			</p:panelGrid>
+		</h:form>
+	</p:dialog>
+</ui:composition>
